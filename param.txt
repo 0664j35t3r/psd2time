@@ -1,0 +1,64 @@
+##########################
+# TIME SERIES PROPERTIES #
+##########################
+# sampling rate in Hertz
+sampling_rate 1000
+#
+# number of sampling points
+num_points 10000
+#
+########################
+# INTERPOLATION SCHEME #
+########################
+# the interpolation scheme can be either "linear" or "logarithmic"
+# the interpolation schemes are analogous to those available in FEMFAT Spectral
+interpolation linear
+#
+###############################
+# DIFFERENTIATION/INTEGRATION #
+###############################
+# The given PSDs describe either a "displacement", "velocity", or an "acceleration"
+# Since in frequency space the integration over time or the differentiation in repsect to time
+# can be easily accomplished, the input and output quantities can be specified independently
+input displacement
+output displacement
+#
+###################
+# PSD DEFINITIONS #
+###################
+# For every time series a PSD must be specified, 
+# in addition cross-PSDs can be specified in order to describe correlations.
+# PSDs and cross-PSDs can be written as Hermitian matrix
+# Therefore it is sufficient to only specify the upper or lower triangle of the matrix
+# Non-specified PSDs are assumed to be equal to zero.
+# Every PSD must be defined in a separate file text file.
+# The first column defines the frequency points, and the second and third columns
+# the real and imaginary parts of the PSDs. The third column only plays a role for cross-PSDs.
+psd 1 1 psd11.txt
+psd 2 2 psd22.txt
+psd 1 2 psd12.txt
+#
+####################
+# GRAPHICAL OUTPUT #
+####################
+# To verify the output some plots can be generated
+# "plot psd" generates the PSD of a time series or the cross-PSD of two different time series,
+# this plots can be used to cross-check with the input data
+#
+# plot psd of generated time series 1
+plot psd 1 1 psd11.png
+#
+#plot cross-psd of time series 1 and 2
+plot psd 1 2 psd12.png
+#
+#plot cross-psd of time series 2 and 1
+plot psd 2 1 psd21.png
+#
+# plot psd of generated time series 2
+plot psd 2 2 psd22.png
+#
+# plot the first 100 points of time series 1
+plot series 1 100 series1.png 
+#
+# plot the first 100 points of time series 2
+plot series 2 100 series2.png 
